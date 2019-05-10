@@ -119,6 +119,27 @@
       }
       return $paganti;
     }
+
+    public static function getEPaganti($conn) {
+
+      $sql = "
+              SELECT *
+              FROM paganti
+              WHERE name LIKE 'E%'
+      ";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        $ePaganti = [];
+        while($row = $result->fetch_assoc()) {
+          $ePaganti[] =
+              new Pagante($row["name"],
+                         $row["lastname"],
+                         $row["address"]);
+        }
+      }
+      return $ePaganti;
+    }
   }
 
   $conn = new mysqli($servername, $username, $password, $dbname);
@@ -132,8 +153,12 @@
   $paganti = Pagante::getAllPaganti($conn);
   $conn->close();
 
+  $paganti = Pagante::getEPaganti($conn);
+  $conn->close();
+
   foreach ($paganti as $pagante) {
     var_dump($pagante); echo "<br>";
   }
+
 
  ?>
