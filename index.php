@@ -150,8 +150,8 @@
     return;
   }
 
-  $paganti = Pagante::getAllPaganti($conn);
-  $conn->close();
+  //$paganti = Pagante::getAllPaganti($conn);
+  //$conn->close();
 
   $paganti = Pagante::getEPaganti($conn);
   $conn->close();
